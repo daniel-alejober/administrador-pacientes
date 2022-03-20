@@ -1,9 +1,10 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import Alerta from "./Alerta";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
 const Formulario = () => {
+  const navigate = useNavigate();
   /*creamos un schema de yup,
   cuando no tome el error que le pongamos en los parentesis, usaremos
   .typeError para definir uno especifico */
@@ -21,7 +22,24 @@ const Formulario = () => {
       .positive("El número no es valido.")
       .typeError("El número no es valido."),
   });
-  const handleSubmit = (valoresFormulario) => {};
+  const handleSubmit = async (valoresFormulario) => {
+    //JSON.stringify(valoresFormulario) asi lo pide json-server
+    try {
+      const url = process.env.REACT_APP_API_URL;
+      const respuesta = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify(valoresFormulario),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (respuesta.status === 201) {
+        navigate("/clientes");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
@@ -36,9 +54,12 @@ const Formulario = () => {
           telefono: "",
           notas: "",
         }}
-        onSubmit={(valoresFormulario) => {
+        // Podemos hacer async la funcion para que espere a que se termine de ejecutar ea funcion
+        // para poder limpiar el formulario
+        onSubmit={async (valoresFormulario, { resetForm }) => {
           /*values son los valoresFormulario de initialValues pueden llevar cualquier nombre */
-          handleSubmit(valoresFormulario);
+          await handleSubmit(valoresFormulario);
+          resetForm();
         }}
         validationSchema={nuevoClienteSchema}
       >
@@ -122,7 +143,7 @@ const Formulario = () => {
             <input
               type="submit"
               value="Agregar Cliente"
-              className="mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg"
+              className="cursor-pointer mt-5 w-full bg-blue-800 p-3 text-white uppercase font-bold text-lg"
             />
           </Form>
         )}

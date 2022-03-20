@@ -1,0 +1,36 @@
+{
+  "clientes": [
+    {
+      "nombre": "Daniel",
+      "empresa": "Mavis S.A.",
+      "email": "correo@correo.com",
+      "telefono": "5555555555",
+      "notas": "Prueba de api",
+      "id": 1
+    },
+    {
+      "nombre": "Mavis",
+      "empresa": "Mavis S.A.",
+      "email": "correomavis@correo.com",
+      "telefono": "5555555555",
+      "notas": "empresa de mavis",
+      "id": 2
+    },
+    {
+      "nombre": "Thompson",
+      "empresa": "Guitarras",
+      "email": "guitarras@guitarras.com",
+      "telefono": "5542374881",
+      "notas": "Venta de guitarras",
+      "id": 3
+    },
+    {
+      "nombre": "White",
+      "empresa": "Vinos y Licores",
+      "email": "vinosylicores@hotmail.com",
+      "telefono": "5532451223",
+      "notas": "Venta de vinos y licores",
+      "id": 4
+    }
+  ]
+}
