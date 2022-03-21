@@ -3,6 +3,7 @@ import Layout from "./layout/Layout";
 import Inicio from "./pages/Inicio";
 import EditarCliente from "./pages/EditarCliente";
 import NuevoCliente from "./pages/NuevoCliente";
+import VerCliente from "./pages/VerCliente";
 /*
  *en Layout.jsx vamos a usar el Outlet que va a mostrar todos los componentes que esten
  *anidados a Layout es algo asi como {children} puedes poner
@@ -19,6 +20,7 @@ function App() {
           <Route index element={<Inicio />} />
           <Route path="nuevo" element={<NuevoCliente />} />
           <Route path="editar/:id" element={<EditarCliente />} />
+          <Route path=":id" element={<VerCliente />} />
         </Route>
       </Routes>
     </BrowserRouter>

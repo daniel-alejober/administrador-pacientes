@@ -31,6 +31,14 @@
       "telefono": "5532451223",
       "notas": "Venta de vinos y licores",
       "id": 4
+    },
+    {
+      "nombre": "danielpuppy",
+      "empresa": "DanielPuppy",
+      "email": "correo@correo.com",
+      "telefono": "5542374881",
+      "notas": "prueba",
+      "id": 5
     }
   ]
 }

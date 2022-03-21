@@ -24,8 +24,9 @@ const Formulario = () => {
   });
   const handleSubmit = async (valoresFormulario) => {
     //JSON.stringify(valoresFormulario) asi lo pide json-server
+    //import.meta.env.VITE_API_URL; asi se usan las variable de entorno en vite
     try {
-      const url = process.env.REACT_APP_API_URL;
+      const url = import.meta.env.VITE_API_URL;
       const respuesta = await fetch(url, {
         method: "POST",
         body: JSON.stringify(valoresFormulario),
@@ -55,7 +56,7 @@ const Formulario = () => {
           notas: "",
         }}
         // Podemos hacer async la funcion para que espere a que se termine de ejecutar ea funcion
-        // para poder limpiar el formulario
+        // para poder limpiar el formulario, destructurando resetForm propiedad de Formik
         onSubmit={async (valoresFormulario, { resetForm }) => {
           /*values son los valoresFormulario de initialValues pueden llevar cualquier nombre */
           await handleSubmit(valoresFormulario);
