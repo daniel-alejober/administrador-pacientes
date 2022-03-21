@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 const Cliente = ({ cliente }) => {
   const navigate = useNavigate();
-  const { nombre, empresa, email, telefono, notas, id } = cliente;
+  const { nombre, empresa, email, telefono, id } = cliente;
   return (
     <tr className="border-b-2 border-black hover:bg-gray-400">
       <td className="p-3 text-center">{nombre}</td>
@@ -11,10 +11,12 @@ const Cliente = ({ cliente }) => {
           <span className="text-gray-800 uppercase font-bold mr-3">Email:</span>
           {email}
         </p>
-        <p>
-          <span className="text-gray-800 uppercase font-bold mr-3">Tel:</span>
-          {telefono}
-        </p>
+        {telefono && (
+          <p>
+            <span className="text-gray-800 uppercase font-bold mr-3">Tel:</span>
+            {telefono}
+          </p>
+        )}
       </td>
       <td className="text-center">{empresa}</td>
       <td>
