@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Formulario from "../components/Formulario";
-import Spinner from "../components/spinner/Spinner";
 
 const EditarCliente = () => {
   const { id } = useParams();
@@ -27,7 +26,13 @@ const EditarCliente = () => {
       <p className="mt-3">
         Utiliza este formulario para editar los datos de un cliente
       </p>
-      <Formulario cliente={cliente} />
+      {cliente.nombre ? (
+        <Formulario cliente={cliente} cargando={cargando} />
+      ) : (
+        <p className="font-black text-4xl text-red-900 mt-10 text-center">
+          No hay resultados para ese ID
+        </p>
+      )}
     </>
   );
 };

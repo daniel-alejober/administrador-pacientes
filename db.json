@@ -1,7 +1,7 @@
 {
   "clientes": [
     {
-      "nombre": "Daniel",
+      "nombre": "DanielEditado",
       "empresa": "Mavis S.A.",
       "email": "correo@correo.com",
       "telefono": "5555555555",
@@ -47,6 +47,14 @@
       "telefono": "",
       "notas": "",
       "id": 6
+    },
+    {
+      "nombre": "Noemi",
+      "empresa": "dibujos",
+      "email": "noemi@hotmail.com",
+      "telefono": "5567899876",
+      "notas": "hago dibujos",
+      "id": 7
     }
   ]
 }

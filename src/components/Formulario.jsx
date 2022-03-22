@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import Alerta from "./Alerta";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import Alerta from "./Alerta";
+import Spinner from "./spinner/Spinner";
 
-const Formulario = ({ cliente }) => {
+const Formulario = ({ cliente, cargando }) => {
   const navigate = useNavigate();
   /*creamos un schema de yup,
   cuando no tome el error que le pongamos en los parentesis, usaremos
@@ -26,23 +27,39 @@ const Formulario = ({ cliente }) => {
     //JSON.stringify(valoresFormulario) asi lo pide json-server
     //import.meta.env.VITE_API_URL; asi se usan las variable de entorno en vite
     try {
-      const url = import.meta.env.VITE_API_URL;
-      const respuesta = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify(valoresFormulario),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (respuesta.status === 201) {
-        navigate("/clientes");
+      if (cliente.id) {
+        const url = `${import.meta.env.VITE_API_URL}/${cliente.id}`;
+        const respuesta = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(valoresFormulario),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (respuesta.status === 200) {
+          navigate("/clientes");
+        }
+      } else {
+        const url = import.meta.env.VITE_API_URL;
+        const respuesta = await fetch(url, {
+          method: "POST",
+          body: JSON.stringify(valoresFormulario),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (respuesta.status === 201) {
+          navigate("/clientes");
+        }
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-  return (
+  return cargando ? (
+    <Spinner />
+  ) : (
     <div className="bg-white mt-10 px-5 py-10 rounded-md shadow-md md:w-3/4 mx-auto">
       <h1 className="text-gray-600 font-bold text-xl uppercase text-center">
         {cliente.nombre ? "Editar Cliente" : "Agregar Cliente"}
@@ -172,6 +189,7 @@ const Formulario = ({ cliente }) => {
  */
 Formulario.defaultProps = {
   cliente: {},
+  cargando: false,
 };
 
 export default Formulario;
