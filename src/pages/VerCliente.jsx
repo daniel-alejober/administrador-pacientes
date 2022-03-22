@@ -4,11 +4,10 @@ import Spinner from "../components/spinner/Spinner";
 
 const VerCliente = () => {
   const { id } = useParams();
-  const [cargando, setCargando] = useState(false);
+  const [cargando, setCargando] = useState(true);
   const [cliente, setCliente] = useState({});
   const { nombre, empresa, email, telefono, notas } = cliente;
   useEffect(() => {
-    setCargando(!cargando);
     const obtenerClienteAPI = async () => {
       try {
         const url = `${import.meta.env.VITE_API_URL}/${id}`;
@@ -18,12 +17,16 @@ const VerCliente = () => {
       } catch (error) {
         console.log(error);
       }
-      setCargando(false);
+      setCargando(!cargando);
     };
     obtenerClienteAPI();
   }, [id]);
 
-  return (
+  return cargando ? (
+    <Spinner />
+  ) : Object.keys(cliente).length === 0 ? (
+    <p className="font-black text-4xl text-red-900">No hay resultados</p>
+  ) : (
     <div>
       {cargando ? (
         <Spinner />
