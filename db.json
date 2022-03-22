@@ -1,7 +1,7 @@
 {
   "clientes": [
     {
-      "nombre": "DanielEditado",
+      "nombre": "Daniel",
       "empresa": "Mavis S.A.",
       "email": "correo@correo.com",
       "telefono": "5555555555",
@@ -31,30 +31,6 @@
       "telefono": "5532451223",
       "notas": "Venta de vinos y licores",
       "id": 4
-    },
-    {
-      "nombre": "danielpuppy",
-      "empresa": "DanielPuppy",
-      "email": "correo@correo.com",
-      "telefono": "5542374881",
-      "notas": "prueba",
-      "id": 5
-    },
-    {
-      "nombre": "SRV",
-      "empresa": "SVR",
-      "email": "svr@correo.com",
-      "telefono": "",
-      "notas": "",
-      "id": 6
-    },
-    {
-      "nombre": "Noemi",
-      "empresa": "dibujos",
-      "email": "noemi@hotmail.com",
-      "telefono": "5567899876",
-      "notas": "hago dibujos",
-      "id": 7
     }
   ]
 }

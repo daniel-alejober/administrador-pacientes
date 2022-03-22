@@ -17,6 +17,25 @@ const Inicio = () => {
     obtenerClientesAPI();
   }, []);
 
+  const eliminarClientes = async (id) => {
+    const confirmar = confirm("¿Deseas eliminar este cliente?");
+    if (confirmar) {
+      try {
+        const url = `${import.meta.env.VITE_API_URL}/${id}`;
+        await fetch(url, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const nuevosClientes = clientes.filter((cliente) => cliente.id !== id);
+        setClientes(nuevosClientes);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  };
+
   return (
     <div>
       <h1 className="font-black text-4xl text-blue-900">Clientes</h1>
@@ -32,7 +51,11 @@ const Inicio = () => {
         </thead>
         <tbody>
           {clientes.map((cliente) => (
-            <Cliente key={cliente.id} cliente={cliente} />
+            <Cliente
+              key={cliente.id}
+              cliente={cliente}
+              eliminarClientes={eliminarClientes}
+            />
           ))}
         </tbody>
       </table>
