@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {useEffect} from 'react';
+import {Route, Routes, useNavigate} from "react-router-dom";
 import Layout from "./layout/Layout";
 import Inicio from "./pages/Inicio";
 import EditarCliente from "./pages/EditarCliente";
@@ -13,17 +14,20 @@ import VerCliente from "./pages/VerCliente";
  *-- si le agregamos un path sera una ruta anidada, mostrando el Layout y ese componente */
 
 function App() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate('/clientes', {replace: true})
+  }, []);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/clientes" element={<Layout />}>
-          <Route index element={<Inicio />} />
-          <Route path="nuevo" element={<NuevoCliente />} />
-          <Route path="editar/:id" element={<EditarCliente />} />
-          <Route path=":id" element={<VerCliente />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/clientes" element={<Layout />}>
+        <Route index element={<Inicio />} />
+        <Route path="nuevo" element={<NuevoCliente />} />
+        <Route path="editar/:id" element={<EditarCliente />} />
+        <Route path=":id" element={<VerCliente />} />
+      </Route>
+    </Routes>
   );
 }
 
