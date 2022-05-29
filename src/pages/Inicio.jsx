@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import Cliente from "../components/Cliente";
 
 const Inicio = () => {
@@ -6,10 +6,15 @@ const Inicio = () => {
   useEffect(() => {
     const obtenerClientesAPI = async () => {
       try {
-        const url = import.meta.env.VITE_API_URL;
-        const respuesta = await fetch(url);
+        // const url = import.meta.env.VITE_API_URL;
+        const respuesta = await fetch('../../public/db.json', {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          }
+        })
         const datosCliente = await respuesta.json();
-        setClientes(datosCliente);
+        setClientes(datosCliente.clientes);
       } catch (error) {
         console.log(error);
       }
@@ -38,10 +43,10 @@ const Inicio = () => {
 
   return (
     <div>
-      <h1 className="font-black text-4xl text-blue-900">Clientes</h1>
+      <h1 className="text-4xl font-black text-blue-900">Clientes</h1>
       <p className="mt-3">Administra tus clientes</p>
-      <table className="w-full mt-5 table-auto shadow bg-white">
-        <thead className="bg-blue-800 text-white">
+      <table className="w-full mt-5 bg-white shadow table-auto">
+        <thead className="text-white bg-blue-800">
           <tr>
             <th className="p-2">Nombre</th>
             <th className="p-2">Contacto</th>
